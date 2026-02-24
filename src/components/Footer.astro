@@ -38,18 +38,27 @@
         </div>
 
         <!-- WeChat -->
-        <div class="flex items-center gap-6">
-          <span class="text-xs text-[#666] w-16">关注我们</span>
+        <div class="flex items-center flex-wrap sm:flex-nowrap gap-x-4 gap-y-2">
+          <span class="text-xs text-[#666] shrink-0">关注我们</span>
+          
           <div class="group relative cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white opacity-80 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-            <!-- QR code popup -->
-            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 bg-white p-3 rounded shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-              <img src="/images/wechat.jpg" alt="微信二维码" class="w-36 h-36 object-contain" />
-              <div class="text-center text-footer-bg text-xs mt-2 font-bold">微信扫一扫关注</div>
-              <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 border-4 border-transparent border-t-white"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white opacity-80 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+            </svg>
+            
+            <div class="absolute bottom-full left-0 mb-4 
+                        w-32 sm:w-48 
+                        bg-white p-2 rounded-lg shadow-2xl 
+                        opacity-0 invisible group-hover:opacity-100 group-hover:visible 
+                        transition-all duration-300 z-50">
+              
+              <img src="/images/wechat.jpg" alt="微信二维码" class="max-w-full h-auto object-cover block mx-auto" />
+              
+              <div class="absolute -bottom-2 left-2 border-4 border-transparent border-t-white"></div>
             </div>
           </div>
-          <span class="text-[#888] text-xs">微信公众号：蒙通货运</span>
+
+          <span class="text-[#888] text-xs break-all">微信公众号：蒙通货运</span>
         </div>
 
         <!-- Email -->
