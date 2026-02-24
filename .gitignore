@@ -1,3 +1,7 @@
+# Ignore files and folders
+.vscode/
+res/
+
 # build output
 dist/
 
