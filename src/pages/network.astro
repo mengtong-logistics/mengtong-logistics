@@ -1,0 +1,499 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="物流网络 — 京蒙干线实时地图 | 蒙通货运" fullscreen={true}>
+  <!-- Back button -->
+  <a
+    href="/"
+    class="fixed top-6 right-6 z-20 flex items-center gap-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md px-5 py-2.5 text-sm font-bold text-white hover:bg-white/20 transition-all"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    返回首页
+  </a>
+
+  <!-- Dashboard Panel -->
+  <div class="dashboard">
+    <h1>京蒙干线 · 物流动脉</h1>
+    <h3>核心网络调度系统 - 实时数据监控 (Live)</h3>
+    <div class="stat-box">
+      <div class="stat-item">
+        <div class="stat-value">58,600+</div>
+        <div class="stat-label">累计发运单量</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">356,000+ <span>吨</span></div>
+        <div class="stat-label">累计承运货量</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">全域</div>
+        <div class="stat-label">京蒙深度覆盖</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <!-- AMap Scripts -->
+  <script is:inline type="text/javascript">
+    window._AMapSecurityConfig = {
+      securityJsCode: 'e00f30c460e64ae46a89d8759d0a7c9d',
+    };
+  </script>
+  <script is:inline src="https://webapi.amap.com/maps?v=2.0&key=8550e61c34552909a3a274db83148089&plugin=AMap.Scale,AMap.ToolBar,AMap.DistrictSearch"></script>
+  <script is:inline src="https://webapi.amap.com/loca?v=2.0.0&key=8550e61c34552909a3a274db83148089"></script>
+
+  <script is:inline>
+    // --- 1. Initialize Map ---
+    var map = new AMap.Map('map', {
+      zoom: 6.7,
+      viewMode: '3D',
+      pitch: 50,
+      rotation: 0,
+      center: [112.5, 42.3],
+      mapStyle: 'amap://styles/dark',
+      features: ['bg', 'point', 'road'],
+      showLabel: false,
+    });
+
+    map.plugin(['AMap.DistrictLayer'], function () {
+      var countryLayer = new AMap.DistrictLayer.Country({
+        zIndex: 80,
+        opacity: 1,
+        visible: true,
+        zooms: [2, 20],
+        styles: {
+          'nation-stroke': '#0000FF',
+          'nation-stroke-width': 2,
+          'province-stroke': '#CCCCCC',
+          fill: 'rgba(255,255,255,0)',
+        },
+      });
+      map.add(countryLayer);
+    });
+
+    // --- 1.5. Highlight business regions ---
+    AMap.plugin('AMap.DistrictSearch', function () {
+      var district = new AMap.DistrictSearch({
+        subdistrict: 0,
+        extensions: 'all',
+        level: 'province',
+      });
+
+      var drawTargetProvince = function (name, style) {
+        district.search(name, function (status, result) {
+          if (status === 'complete' && result.districtList[0]) {
+            var boundaries = result.districtList[0].boundaries;
+            if (boundaries) {
+              for (var i = 0; i < boundaries.length; i++) {
+                var polygon = new AMap.Polygon({
+                  path: boundaries[i],
+                  strokeColor: '#ffffff',
+                  strokeWeight: 2.5,
+                  strokeOpacity: 0.9,
+                  strokeStyle: 'dashed',
+                  strokeDasharray: [10, 8],
+                  fillColor: style.fillColor,
+                  fillOpacity: style.fillOpacity,
+                  zIndex: 99,
+                });
+                polygon.setMap(map);
+              }
+            }
+          }
+        });
+      };
+
+      drawTargetProvince('内蒙古自治区', {
+        fillColor: '#87cefa',
+        fillOpacity: 0.08,
+      });
+
+      drawTargetProvince('北京市', {
+        fillColor: '#8a2be2',
+        fillOpacity: 0.12,
+      });
+    });
+
+    var loca = new Loca.Container({ map: map });
+
+    // --- 2. Route Data ---
+    var origin = { name: '北京枢纽', coord: [116.407394, 39.904211] };
+    var destinations = [
+      { name: '呼和浩特', coord: [111.74868, 40.842799], level: 'primary', count: 12000 },
+      { name: '包头', coord: [109.840405, 40.658168], level: 'primary', count: 9500 },
+      { name: '赤峰', coord: [118.928236, 42.274384], level: 'primary', count: 8600 },
+      { name: '通辽', coord: [122.24278, 43.642738], level: 'primary', count: 7300 },
+      { name: '乌海', coord: [106.825563, 39.673734], level: 'primary', count: 5500 },
+      { name: '鄂尔多斯', coord: [109.781327, 39.608266], level: 'secondary', count: 3500 },
+      { name: '乌兰察布', coord: [113.114543, 41.034126], level: 'secondary', count: 2800 },
+      { name: '锡林浩特', coord: [116.096321, 43.931885], level: 'secondary', count: 2200 },
+      { name: '巴彦淖尔', coord: [107.416959, 40.757402], level: 'secondary', count: 1900 },
+      { name: '呼伦贝尔', coord: [119.760822, 49.201635], level: 'secondary', count: 1500 },
+      { name: '阿拉善左旗', coord: [105.706422, 38.844814], level: 'secondary', count: 1200 },
+      { name: '二连浩特', coord: [111.97664, 43.653037], level: 'secondary', count: 800 },
+      { name: '满洲里', coord: [117.4479, 49.5827], level: 'tertiary', count: 900 },
+      { name: '乌兰浩特', coord: [122.0664, 46.0822], level: 'tertiary', count: 850 },
+      { name: '霍林郭勒', coord: [119.6543, 45.3222], level: 'tertiary', count: 800 },
+      { name: '阿尔山', coord: [119.9431, 47.1772], level: 'tertiary', count: 600 },
+      { name: '牙克石', coord: [120.737, 49.2847], level: 'tertiary', count: 700 },
+      { name: '扎兰屯', coord: [122.737, 48.0136], level: 'tertiary', count: 750 },
+      { name: '根河', coord: [121.522, 50.7801], level: 'tertiary', count: 400 },
+      { name: '丰镇', coord: [113.161, 40.4357], level: 'tertiary', count: 650 },
+      { name: '乌审旗', coord: [108.846, 38.5991], level: 'tertiary', count: 550 },
+      { name: '达拉特旗', coord: [110.033, 40.4001], level: 'tertiary', count: 950 },
+    ];
+
+    var lineFeatures = [];
+    var pointFeatures = [];
+
+    pointFeatures.push({
+      type: 'Feature',
+      properties: { name: origin.name, level: 'origin' },
+      geometry: { type: 'Point', coordinates: origin.coord },
+    });
+
+    var ORDERS_PER_LINE = 100;
+
+    destinations.forEach(function (dest) {
+      pointFeatures.push({
+        type: 'Feature',
+        properties: { name: dest.name, level: dest.level, count: dest.count },
+        geometry: { type: 'Point', coordinates: dest.coord },
+      });
+
+      var lineCount = Math.ceil(dest.count / ORDERS_PER_LINE);
+      var dist = Math.sqrt(
+        Math.pow(dest.coord[0] - origin.coord[0], 2) + Math.pow(dest.coord[1] - origin.coord[1], 2)
+      );
+
+      for (var i = 0; i < lineCount; i++) {
+        var spread = dest.level === 'primary' ? 0.35 : dest.level === 'secondary' ? 0.2 : 0.08;
+        var offsetX = (Math.random() - 0.5) * spread;
+        var offsetY = (Math.random() - 0.5) * spread;
+        var targetCoord = [dest.coord[0] + offsetX, dest.coord[1] + offsetY];
+
+        lineFeatures.push({
+          type: 'Feature',
+          properties: { name: dest.name, level: dest.level, count: dest.count, distance: dist },
+          geometry: { type: 'LineString', coordinates: [origin.coord, targetCoord] },
+        });
+      }
+
+      var isPrimary = dest.level === 'primary';
+      var isSecondary = dest.level === 'secondary';
+
+      var textMarker = new AMap.Text({
+        text: dest.name,
+        position: dest.coord,
+        anchor: 'middle-left',
+        offset: new AMap.Pixel(10, 0),
+        style: {
+          'background-color': 'transparent',
+          border: 'none',
+          color: isPrimary ? '#ffffff' : isSecondary ? '#7b9cce' : '#4f6c82',
+          'font-size': isPrimary ? '22px' : isSecondary ? '16px' : '12px',
+          'font-weight': isPrimary ? 'bold' : 'normal',
+          'text-shadow': isPrimary
+            ? '0 0 10px rgba(0, 255, 255, 1)'
+            : '0 0 5px rgba(0, 0, 0, 0.8)',
+          'font-family': 'sans-serif',
+        },
+        zIndex: isPrimary ? 100 : 50,
+      });
+      map.add(textMarker);
+    });
+
+    map.add(
+      new AMap.Text({
+        text: '北京调度中心',
+        position: origin.coord,
+        anchor: 'middle-right',
+        offset: new AMap.Pixel(200, 40),
+        style: {
+          'background-color': 'rgba(255, 200, 0, 0.1)',
+          border: '3px solid rgba(255, 200, 0, 0.5)',
+          'border-radius': '8px',
+          padding: '8px 16px',
+          color: '#ffcc00',
+          'font-size': '24px',
+          'font-weight': 'bold',
+          'text-shadow': '0 0 24px rgba(255, 200, 0, 0.8)',
+        },
+        zIndex: 200,
+      })
+    );
+
+    var lineGeoJSON = { type: 'FeatureCollection', features: lineFeatures };
+    var pointGeoJSON = { type: 'FeatureCollection', features: pointFeatures };
+
+    // --- Breathing Nodes ---
+    var cyanBreathIcon =
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImciIGN4PSI1MCUiIGN5PSI1MCUiIHI9IjUwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+PHN0b3Agb2Zmc2V0PSIyMCUi c3RvcC1jb2xvcj0iIzAwZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjgiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzAwODhmZiIgc3RvcC1vcGFjaXR5PSIwLjMifT48c3RvcCBvZmZzZXQ9IjEwMCUi c3RvcC1jb2xvcj0iIzAwODhmZiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iMTI4IiBjeT0iMTI4IiByPSIxMjgiIGZpbGw9InVybCgjZykiLz48L3N2Zz4=';
+    var goldBreathIcon =
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImciIGN4PSI1MCUiIGN5PSI1MCUiIHI9IjUwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmY2MwMCIgc3RvcC1vcGFjaXR5PSIxIi8+PHN0b3Agb2Zmc2V0PSIyMCUi c3RvcC1jb2xvcj0iI2ZmY2MwMCIgc3RvcC1vcGFjaXR5PSIwLjgiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2ZmODgwMCIgc3RvcC1vcGFjaXR5PSIwLjMifT48c3RvcCBvZmZzZXQ9IjEwMCUi c3RvcC1jb2xvcj0iI2ZmODgwMCIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iMTI4IiBjeT0iMTI4IiByPSIxMjgiIGZpbGw9InVybCgjZykiLz48L3N2Zz4=';
+
+    var scatter = new Loca.ScatterLayer({ loca: loca, zIndex: 10, opacity: 0.8, zooms: [2, 22] });
+    scatter.setSource(new Loca.GeoJSONSource({ data: pointGeoJSON }));
+    scatter.setStyle({
+      unit: 'meter',
+      size: function (index, feat) {
+        if (!feat || !feat.properties) return [30000, 30000];
+        if (feat.properties.level === 'origin') return [180000, 180000];
+        if (feat.properties.level === 'primary') return [120000, 120000];
+        if (feat.properties.level === 'secondary') return [70000, 70000];
+        return [30000, 30000];
+      },
+      borderWidth: 0,
+      texture: function (index, feat) {
+        return !feat || !feat.properties || feat.properties.level !== 'origin'
+          ? cyanBreathIcon
+          : goldBreathIcon;
+      },
+      duration: function (index, feat) {
+        return !feat || !feat.properties ? 2000 : feat.properties.level === 'primary' ? 1500 : 2500;
+      },
+      animate: true,
+    });
+    loca.add(scatter);
+
+    // --- Pulse Link Layer ---
+    var pulseLink = new Loca.PulseLinkLayer({
+      loca: loca,
+      zIndex: 15,
+      opacity: 1,
+      visible: true,
+      zooms: [2, 22],
+      depth: true,
+    });
+    pulseLink.setSource(new Loca.GeoJSONSource({ data: lineGeoJSON }));
+    pulseLink.setStyle({
+      unit: 'meter',
+      dash: [40000, 0, 40000, 0],
+      lineWidth: function (index, feat) {
+        if (!feat || !feat.properties) return [6000, 1000];
+        if (feat.properties.level === 'primary') return [15000, 3500];
+        if (feat.properties.level === 'secondary') return [10000, 2000];
+        return [6000, 1500];
+      },
+      height: function (index, feat) {
+        if (!feat || !feat.properties) return 150000;
+        return feat.properties.distance * 280000 + 300000 + Math.random() * 200000;
+      },
+      smoothSteps: 100,
+      speed: function (index, feat) {
+        if (!feat || !feat.properties) return 100000;
+        var baseSpeed = feat.properties.level === 'primary' ? 250000 : 150000;
+        return baseSpeed + Math.random() * 100000;
+      },
+      flowLength: 180000,
+      lineColors: function () {
+        return ['rgba(138, 43, 226, 0.4)', 'rgba(0, 150, 255, 0.8)', 'rgba(0, 255, 255, 1)'];
+      },
+      maxHeightScale: 0.4,
+      headColor: 'rgba(0, 255, 255, 1)',
+      trailColor: 'rgba(0, 50, 255, 0)',
+    });
+    loca.add(pulseLink);
+    loca.animate.start();
+
+    // --- Tooltip ---
+    var hoverInfo = new AMap.Marker({
+      anchor: 'bottom-center',
+      offset: new AMap.Pixel(0, -15),
+    });
+    hoverInfo.setMap(map);
+    hoverInfo.hide();
+
+    map.on('mousemove', function (e) {
+      var feat = pulseLink.queryFeature(e.pixel.toArray());
+      if (feat && feat.properties) {
+        var props = feat.properties;
+        hoverInfo.setPosition(feat.coordinates[1]);
+        var levelName =
+          props.level === 'primary'
+            ? '核心主干线'
+            : props.level === 'secondary'
+            ? '次级网络线'
+            : '下沉渗透支线';
+        var levelColor =
+          props.level === 'primary'
+            ? '#00ffff'
+            : props.level === 'secondary'
+            ? '#8ab4f8'
+            : '#a0b0c0';
+
+        hoverInfo.setContent(
+          '<div class="cyber-tooltip">' +
+            '<div class="title">▶ 运输链路: 北京 ⇌ ' + props.name + '</div>' +
+            '<div>运力网级: <span style="color:' + levelColor + '; font-weight:bold;">[ ' + levelName + ' ]</span></div>' +
+            '<div>累计承运: <span class="highlight">' + props.count.toLocaleString() + '</span> 单</div>' +
+            '<div style="margin-top:8px; font-size:12px; color:#4caf50; display:flex; align-items:center;">' +
+            '<span style="display:inline-block; width:6px; height:6px; background:#4caf50; border-radius:50%; margin-right:6px; box-shadow:0 0 5px #4caf50;"></span>' +
+            '干线畅通 / 实时调度中' +
+            '</div>' +
+          '</div>'
+        );
+        hoverInfo.show();
+      } else {
+        hoverInfo.hide();
+      }
+    });
+  </script>
+</Layout>
+
+<style is:global>
+  /* Map page styles */
+  #map {
+    width: 100%;
+    height: 100%;
+    background-color: #020712;
+  }
+
+  .dashboard {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    z-index: 10;
+    background: rgba(4, 15, 34, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 25px 30px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1), inset 0 0 10px rgba(0, 255, 255, 0.05);
+    pointer-events: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .dashboard::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid #00ffff;
+    border-left: 2px solid #00ffff;
+    border-top-left-radius: 8px;
+  }
+
+  .dashboard::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid #00ffff;
+    border-right: 2px solid #00ffff;
+    border-bottom-right-radius: 8px;
+  }
+
+  .dashboard h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+  }
+
+  .dashboard h3 {
+    font-weight: 400;
+    margin-top: 10px;
+    color: #8ab4f8;
+    font-size: 14px;
+    letter-spacing: 1px;
+    opacity: 0.9;
+  }
+
+  .stat-box {
+    display: flex;
+    margin-top: 20px;
+    gap: 20px;
+  }
+
+  .stat-item {
+    background: rgba(0, 255, 255, 0.05);
+    border-left: 3px solid #00ffff;
+    padding: 10px 15px;
+    min-width: 120px;
+  }
+
+  .stat-value {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ffff;
+  }
+
+  .stat-value span {
+    font-size: 14px;
+    font-weight: normal;
+    color: #8ab4f8;
+  }
+
+  .stat-label {
+    color: #7b9cce;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .cyber-tooltip {
+    min-width: 260px;
+    padding: 14px 18px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    background: rgba(12, 22, 38, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2), inset 0 0 10px rgba(0, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #cfd8dc;
+    font-size: 13px;
+    line-height: 1.8;
+    pointer-events: none;
+  }
+
+  .cyber-tooltip .title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    border-bottom: 1px dashed rgba(0, 255, 255, 0.3);
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .cyber-tooltip .highlight {
+    color: #ffb300;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 0 0 5px rgba(255, 179, 0, 0.5);
+  }
+
+  /* Mobile responsive for dashboard */
+  @media (max-width: 768px) {
+    .dashboard {
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      padding: 16px 20px;
+    }
+    .dashboard h1 {
+      font-size: 20px;
+    }
+    .stat-box {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .stat-item {
+      min-width: 80px;
+    }
+    .stat-value {
+      font-size: 18px;
+    }
+  }
+</style>

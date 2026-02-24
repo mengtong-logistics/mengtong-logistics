@@ -9,12 +9,16 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^4.4.2",
     "@deck.gl/geo-layers": "^9.2.9",
     "@deck.gl/layers": "^9.2.9",
     "@deck.gl/react": "^9.2.9",
     "@luma.gl/constants": "^9.2.6",
     "@tailwindcss/vite": "^4.2.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "astro": "^5.17.1",
+    "lucide-react": "^0.575.0",
     "mapbox-gl": "^3.18.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

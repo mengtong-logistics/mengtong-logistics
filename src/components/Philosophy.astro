@@ -1,0 +1,36 @@
+---
+---
+<section id="philosophy" class="relative py-32 md:py-48 bg-primary overflow-hidden">
+  <img
+    src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop"
+    alt=""
+    class="absolute inset-0 h-full w-full object-cover opacity-10 grayscale"
+    loading="lazy"
+  />
+  <div class="philosophy-block relative z-10 max-w-5xl mx-auto px-6 text-center">
+    <p class="phi-line text-xl md:text-2xl text-gray-400 font-medium mb-8 opacity-0 translate-y-12 transition-all duration-1000 ease-out">
+      大多数货运中介关注：<span class="text-white">单次交易与信息差价</span>。
+    </p>
+    <h2 class="phi-line text-4xl md:text-6xl lg:text-7xl font-serif italic text-white leading-tight opacity-0 translate-y-12 transition-all duration-1000 ease-out" style="transition-delay: 200ms">
+      我们关注：<br />
+      <span class="text-accent font-black not-italic font-sans block mt-4 tracking-tight">长效履约与极致安全。</span>
+    </h2>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.phi-line').forEach((el) => {
+            (el as HTMLElement).style.opacity = '1';
+            (el as HTMLElement).style.transform = 'translateY(0)';
+          });
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+  document.querySelectorAll('.philosophy-block').forEach(el => observer.observe(el));
+</script>

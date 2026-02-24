@@ -1,23 +1,40 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  fullscreen?: boolean;
+}
+
+const {
+  title = '北京市蒙通货运服务有限责任公司 — 京蒙干线物流专家',
+  description = '扎根货运二十载，重信守诺，安全必达。北京至内蒙古全域物流服务，整车直达、大件特种运输。',
+  fullscreen = false,
+} = Astro.props;
+---
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/logo.png" type="image/png" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class:list={[fullscreen ? 'fullscreen' : '']}>
+    <slot />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html, body {
+    margin: 0;
+    width: 100%;
+  }
+  body.fullscreen {
+    height: 100%;
+    overflow: hidden;
+  }
 </style>
