@@ -9,6 +9,19 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.17.1"
+    "@deck.gl/geo-layers": "^9.2.9",
+    "@deck.gl/layers": "^9.2.9",
+    "@deck.gl/react": "^9.2.9",
+    "@luma.gl/constants": "^9.2.6",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^5.17.1",
+    "mapbox-gl": "^3.18.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-map-gl": "^8.1.0",
+    "tailwindcss": "^4.2.1"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
   }
 }
