@@ -30,7 +30,7 @@ export default function Navbar() {
         <a href="/#features" className="hover:-translate-y-0.5 transition-transform">核心优势</a>
         <a href="/#philosophy" className="hover:-translate-y-0.5 transition-transform">经营理念</a>
         <a href="/#services" className="hover:-translate-y-0.5 transition-transform">业务生态</a>
-        <a href="/network" className="hover:-translate-y-0.5 transition-transform">物流网络</a>
+        <a href="/#network" className="hover:-translate-y-0.5 transition-transform">物流网络</a>
       </div>
 
       {/* CTA */}
@@ -63,7 +63,7 @@ export default function Navbar() {
           <a href="/#features" className="font-medium py-2" onClick={() => setMenuOpen(false)}>核心优势</a>
           <a href="/#philosophy" className="font-medium py-2" onClick={() => setMenuOpen(false)}>经营理念</a>
           <a href="/#services" className="font-medium py-2" onClick={() => setMenuOpen(false)}>业务生态</a>
-          <a href="/network" className="font-medium py-2" onClick={() => setMenuOpen(false)}>物流网络</a>
+          <a href="/#network" className="font-medium py-2" onClick={() => setMenuOpen(false)}>物流网络</a>
           <a
             href="tel:13910225509"
             className="mt-2 flex items-center justify-center gap-2 rounded-full bg-[#0B132B] text-white px-6 py-3 text-sm font-bold"

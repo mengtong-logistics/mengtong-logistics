@@ -38,27 +38,24 @@
         </div>
 
         <!-- WeChat -->
-        <div class="flex items-center flex-wrap sm:flex-nowrap gap-x-4 gap-y-2">
-          <span class="text-xs text-[#666] shrink-0">关注我们</span>
-          
-          <div class="group relative cursor-pointer">
+        <div class="flex items-center gap-6 mb-5"> <span class="text-xs text-[#666] w-16 shrink-0">关注我们</span> <div class="group relative cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white opacity-80 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
             </svg>
             
             <div class="absolute bottom-full left-0 mb-4 
-                        w-32 sm:w-48 
+                        w-48 
                         bg-white p-2 rounded-lg shadow-2xl 
                         opacity-0 invisible group-hover:opacity-100 group-hover:visible 
                         transition-all duration-300 z-50">
               
-              <img src="/images/wechat.jpg" alt="微信二维码" class="max-w-full h-auto object-cover block mx-auto" />
+              <img src="/images/wechat.jpg" alt="微信二维码" class="w-full h-auto object-cover block mx-auto" />
               
               <div class="absolute -bottom-2 left-2 border-4 border-transparent border-t-white"></div>
             </div>
           </div>
 
-          <span class="text-[#888] text-xs break-all">微信公众号：蒙通货运</span>
+          <span class="text-[#888] text-xs">微信公众号：蒙通货运</span>
         </div>
 
         <!-- Email -->
@@ -81,7 +78,7 @@
         <div class="w-1/2 md:w-auto">
           <h4 class="text-white font-bold mb-6 text-sm tracking-wider">物流网络</h4>
           <ul class="space-y-4">
-            <li><a href="/network" class="hover:text-white transition-colors">实时物流地图</a></li>
+            <li><a href="/#network" class="hover:text-white transition-colors">物流网络</a></li>
             <li><a href="/#philosophy" class="hover:text-white transition-colors">经营理念</a></li>
           </ul>
         </div>
@@ -109,11 +106,17 @@
     </div>
 
     <!-- Bottom Section -->
-    <div class="pt-6 flex flex-col lg:flex-row justify-between items-start lg:items-center text-xs text-[#666] leading-relaxed gap-4">
-      <div>
-        <div>Copyright 2001-2026 北京市蒙通货运服务有限责任公司 All Rights Reserved</div>
-        <div class="mt-1">统一社会信用代码: 91110115802097553M</div>
-        <div class="mt-1">地址：北京市大兴区兴华大街（二段）3号院2号楼5层605</div>
+    <div class="pt-6 flex flex-col items-center text-xs text-[#666] leading-relaxed gap-2">
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-1">
+        <span>Copyright 2001-2026 北京市蒙通货运服务有限责任公司 All Rights Reserved</span>
+        <span>统一社会信用代码: 91110115802097553M</span>
+      </div>
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-1">
+        <span>地址：北京市大兴区兴华大街（二段）3号院2号楼5层605</span>
+        <a href="/images/license.png" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          营业执照
+        </a>
       </div>
     </div>
   </div>
