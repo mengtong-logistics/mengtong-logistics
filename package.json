@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.0",
     "@deck.gl/geo-layers": "^9.2.9",
     "@deck.gl/layers": "^9.2.9",
     "@deck.gl/react": "^9.2.9",

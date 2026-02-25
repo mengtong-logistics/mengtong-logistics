@@ -20,7 +20,24 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/images/logo.png" type="image/png" />
     <meta name="description" content={description} />
+    <meta name="keywords" content="蒙通货运, 北京物流, 内蒙古物流, 京蒙干线, 货运公司, 大件运输, 整车直达, 零担物流, 仓储配送" />
+    <meta name="author" content="北京市蒙通货运服务有限责任公司" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mengtonghuoyun.cn/" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://mengtonghuoyun.cn/images/logo.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://mengtonghuoyun.cn/" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content="https://mengtonghuoyun.cn/images/logo.png" />
+
     <title>{title}</title>
   </head>
   <body class:list={[fullscreen ? 'fullscreen' : '']}>
