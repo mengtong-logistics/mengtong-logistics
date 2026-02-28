@@ -1,0 +1,996 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="企业介绍 — 蒙通货运 · 承载重托，安全必达" fullscreen={true}>
+  <!-- Back button (same pattern as network.astro) -->
+  <a
+    href="/"
+    style="z-index:1001"
+    class="fixed top-6 left-6 flex items-center gap-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md px-5 py-2.5 text-sm font-bold text-white hover:bg-white/20 transition-all"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    返回主页
+  </a>
+
+  <!-- Progress bar -->
+  <div class="pitch-progress-bar" id="progressBar"></div>
+
+  <!-- Navigation dots -->
+  <nav class="pitch-nav-dots" id="navDots"></nav>
+
+  <!-- Keyboard hint -->
+  <div class="pitch-keyboard-hint" id="keyHint">↓ 滚动 / 方向键导航</div>
+
+  <!-- Pitch slide container -->
+  <div class="pitch-container" id="pitchContainer">
+
+    <!-- SLIDE 1: TITLE -->
+    <section class="pitch-slide" id="slide-1">
+      <div class="blob blob-blue" style="width:clamp(250px,40vw,500px);height:clamp(250px,40vw,500px);top:10%;right:10%;animation:drift 14s ease-in-out infinite alternate"></div>
+      <div class="blob blob-cyan" style="width:clamp(200px,30vw,400px);height:clamp(200px,30vw,400px);bottom:10%;left:15%;animation:drift 14s ease-in-out infinite alternate-reverse"></div>
+      <div class="blob blob-indigo" style="width:clamp(150px,25vw,350px);height:clamp(150px,25vw,350px);top:45%;left:45%;animation:drift 12s ease-in-out infinite alternate;animation-delay:-4s"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <img class="pitch-slide-image pitch-logo reveal" src="/presentation-assets/logo_200.png" alt="蒙通货运">
+        <span class="pitch-badge reveal">成立于 2001 · 北京蒙通货运</span>
+        <h1 class="reveal">承载重托<br><em>安全必达</em></h1>
+        <div class="pitch-divider reveal"></div>
+        <p class="pitch-subtitle reveal">扎根货运二十载 · 重信守诺 · 安全必达</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: 行业痛点 -->
+    <section class="pitch-slide" id="slide-2">
+      <div class="blob blob-blue" style="width:clamp(200px,35vw,450px);height:clamp(200px,35vw,450px);top:5%;left:5%;animation:drift 12s ease-in-out infinite alternate"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">行业现状</span>
+        <h2 class="reveal">货运行业的<em>三大困局</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <div class="pitch-cards reveal" style="margin-top: var(--pitch-content-gap);">
+          <div class="pitch-card">
+            <div class="pitch-card-icon">🔗</div>
+            <h3>层层转包</h3>
+            <p>货主 → 信息部 → 物流公司 → 二级承运 → 司机。每转一手加一次价，无人为货物负责。</p>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-card-icon">💸</div>
+            <h3>隐形收费</h3>
+            <p>报价不透明，等货到了才知道还有装卸费、保险费、中转费……层层加码。</p>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-card-icon">🤷</div>
+            <h3>追责无门</h3>
+            <p>货损、延误找不到人，中间商互相踢皮球。信息差赚利润，出事无担当。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: 我们的答案 -->
+    <section class="pitch-slide" id="slide-3">
+      <div class="blob blob-cyan" style="width:clamp(250px,40vw,500px);height:clamp(250px,40vw,500px);bottom:5%;right:10%;animation:drift 14s ease-in-out infinite alternate"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">蒙通理念</span>
+        <h2 class="reveal">拒绝信息差生意<br>回归<em>履约本质</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <div class="pitch-two-col reveal" style="margin-top: var(--pitch-content-gap);">
+          <div>
+            <h3 style="color:var(--pitch-accent-light); margin-bottom: var(--pitch-element-gap);">行业常态</h3>
+            <ul class="pitch-bullet-list">
+              <li>追求单次交易利润</li>
+              <li>信息不对称赚差价</li>
+              <li>出问题没人扛</li>
+              <li>资质真假难辨</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="color:var(--pitch-accent-light); margin-bottom: var(--pitch-element-gap);">蒙通主张</h3>
+            <ul class="pitch-bullet-list">
+              <li>追求长效履约关系</li>
+              <li>明码标价，无隐形消费</li>
+              <li>全程负责到底</li>
+              <li>注册资本1528万兜底</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: 公司概览 -->
+    <section class="pitch-slide" id="slide-4">
+      <div class="blob blob-indigo" style="width:clamp(200px,35vw,400px);height:clamp(200px,35vw,400px);top:10%;right:5%;animation:drift 13s ease-in-out infinite alternate"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">公司概览</span>
+        <h2 class="reveal">北京市蒙通货运<br>服务有限责任公司</h2>
+        <div class="pitch-divider reveal"></div>
+        <div class="pitch-cards reveal" style="margin-top: var(--pitch-content-gap);">
+          <div class="pitch-card">
+            <div class="pitch-card-icon">🏢</div>
+            <h3>20年实体老牌</h3>
+            <p>2001年成立于北京，深耕京蒙干线货运二十年，非平台中间商。</p>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-card-icon">🏦</div>
+            <h3>注册资本1528万</h3>
+            <p>以真金白银为每一单运输背书，不是皮包公司、不是信息中介。</p>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-card-icon">🚛</div>
+            <h3>千辆级协力车队</h3>
+            <p>整合优质运力资源，自营+协力模式确保运力弹性，随时可调。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: 核心数据 -->
+    <section class="pitch-slide" id="slide-5">
+      <div class="blob blob-blue" style="width:clamp(300px,45vw,550px);height:clamp(300px,45vw,550px);top:30%;left:50%;transform:translateX(-50%);animation:drift 16s ease-in-out infinite alternate"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">核心数据</span>
+        <h2 class="reveal">用数字说话</h2>
+        <div class="pitch-divider reveal"></div>
+        <div class="pitch-metrics reveal" style="margin-top: var(--pitch-content-gap);">
+          <div>
+            <div class="pitch-metric-val"><span class="counter" data-target="58600">0</span><span class="pitch-accent">+</span></div>
+            <div class="pitch-metric-desc">累计发运单量</div>
+          </div>
+          <div>
+            <div class="pitch-metric-val"><span class="counter" data-target="356000">0</span><span class="pitch-accent">吨</span></div>
+            <div class="pitch-metric-desc">累计承运货量</div>
+          </div>
+          <div>
+            <div class="pitch-metric-val"><span class="counter" data-target="22">0</span><span class="pitch-accent">+</span></div>
+            <div class="pitch-metric-desc">覆盖节点城市</div>
+          </div>
+        </div>
+        <div class="pitch-highlight-box reveal" style="margin-top: var(--pitch-content-gap); max-width: 480px;">
+          <p>每一个数字背后，都是一次"说到做到"的履约承诺。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: 物流网络 -->
+    <section class="pitch-slide" id="slide-6">
+      <div class="blob blob-cyan" style="width:clamp(200px,30vw,400px);height:clamp(200px,30vw,400px);top:5%;left:10%;animation:drift 11s ease-in-out infinite alternate"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">网络覆盖</span>
+        <h2 class="reveal">京蒙干线 · <em>22城联运</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <img class="pitch-slide-image reveal" src="/presentation-assets/logistics-preview.png" alt="蒙通物流网络覆盖图" style="margin-top: var(--pitch-content-gap);">
+        <p class="pitch-subtitle reveal" style="margin-top: var(--pitch-element-gap);">以北京为枢纽，贯穿内蒙古全线，22+节点城市高效联运</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: 整车直达 -->
+    <section class="pitch-slide" id="slide-7">
+      <div class="blob blob-indigo" style="width:clamp(200px,35vw,450px);height:clamp(200px,35vw,450px);bottom:10%;left:5%;animation:drift 13s ease-in-out infinite alternate"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">服务一</span>
+        <h2 class="reveal">整车直达<em>运输</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <ul class="pitch-bullet-list reveal" style="margin-top: var(--pitch-content-gap);">
+          <li>13米 / 17.5米重型卡车，满足各类货量需求</li>
+          <li>点对点直达，不中转、不拼车、不转包</li>
+          <li>全程GPS定位跟踪，实时掌握货物动态</li>
+          <li>标准化装卸流程，减少搬运损耗</li>
+          <li>明码标价，出发前锁定运费，绝无加价</li>
+        </ul>
+        <div class="pitch-highlight-box reveal" style="margin-top: var(--pitch-content-gap); max-width: 500px;">
+          <p>🚛 适用场景：工厂发货、工地物资、批量商品流通</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: 大件特种运输 -->
+    <section class="pitch-slide" id="slide-8">
+      <div class="blob blob-blue" style="width:clamp(250px,40vw,500px);height:clamp(250px,40vw,500px);top:5%;right:5%;animation:drift 14s ease-in-out infinite alternate"></div>
+      <div class="blob blob-cyan" style="width:clamp(150px,20vw,300px);height:clamp(150px,20vw,300px);bottom:15%;left:20%;animation:drift 10s ease-in-out infinite alternate-reverse"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal" style="background: var(--pitch-accent-subtle);">核心业务</span>
+        <h2 class="reveal">大件特种<em>运输</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <ul class="pitch-bullet-list reveal" style="margin-top: var(--pitch-content-gap);">
+          <li>重型设备、超宽超高异形货物专业承运</li>
+          <li>专项方案设计：路线勘察 → 车辆选型 → 护送安排</li>
+          <li>持有大件运输专项资质，合规安全</li>
+          <li>20年丰富经验，处理过无数复杂工况</li>
+        </ul>
+        <div class="pitch-highlight-box reveal" style="margin-top: var(--pitch-content-gap); max-width: 520px;">
+          <p>⚙️ 大件运输是蒙通的看家本领 — 别人不敢接的，我们有底气。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: 车队/司机加盟 -->
+    <section class="pitch-slide" id="slide-9">
+      <div class="blob blob-indigo" style="width:clamp(200px,30vw,400px);height:clamp(200px,30vw,400px);top:15%;left:60%;animation:drift 12s ease-in-out infinite alternate"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">服务三</span>
+        <h2 class="reveal">车队 / 司机<em>加盟合作</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <ul class="pitch-bullet-list reveal" style="margin-top: var(--pitch-content-gap);">
+          <li>稳定货源保障，减少空驶率</li>
+          <li>运费结算快速，无拖欠问题</li>
+          <li>合规挂靠，手续齐全</li>
+          <li>20年品牌背书，跑蒙通的活放心</li>
+        </ul>
+        <div class="pitch-highlight-box reveal" style="margin-top: var(--pitch-content-gap); max-width: 480px;">
+          <p>🤝 你出车、我出货，长期合作、互利共赢</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: 标准履约流程 -->
+    <section class="pitch-slide" id="slide-10">
+      <div class="blob blob-cyan" style="width:clamp(200px,35vw,450px);height:clamp(200px,35vw,450px);bottom:5%;right:15%;animation:drift 13s ease-in-out infinite alternate"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">标准流程</span>
+        <h2 class="reveal">三步<em>闭环履约</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <div class="pitch-steps reveal" style="margin-top: var(--pitch-content-gap);">
+          <div class="pitch-step">
+            <div class="pitch-step-num">01</div>
+            <h3>精准调度与资质核查</h3>
+            <p>接单即匹配最优车辆，严格审核司机资质与车况，出发前锁定运费。</p>
+          </div>
+          <div class="pitch-step">
+            <div class="pitch-step-num">02</div>
+            <h3>管家式全程盯办</h3>
+            <p>专人跟单、实时定位、关键节点主动通知，比您还操心。</p>
+          </div>
+          <div class="pitch-step">
+            <div class="pitch-step-num">03</div>
+            <h3>安全交付与极速结算</h3>
+            <p>货到签收确认，运费快速结清，售后问题24小时响应。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: 透明定价承诺 -->
+    <section class="pitch-slide" id="slide-11">
+      <div class="blob blob-blue" style="width:clamp(200px,35vw,400px);height:clamp(200px,35vw,400px);top:10%;left:10%;animation:drift 12s ease-in-out infinite alternate"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">定价承诺</span>
+        <h2 class="reveal">明码标价<br><em>拒绝隐形消费</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <div class="pitch-cards reveal" style="margin-top: var(--pitch-content-gap);">
+          <div class="pitch-card">
+            <div class="pitch-card-icon">📋</div>
+            <h3>报价即最终价</h3>
+            <p>出发前确认全部费用，途中不加价，到货不变卦。</p>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-card-icon">🔍</div>
+            <h3>费用明细透明</h3>
+            <p>运费、保险、装卸逐项列明，每一分钱花得清清楚楚。</p>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-card-icon">🛡️</div>
+            <h3>合同保障</h3>
+            <p>标准运输协议，责任清晰，白纸黑字不扯皮。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 12: 资质与信誉 -->
+    <section class="pitch-slide" id="slide-12">
+      <div class="blob blob-indigo" style="width:clamp(200px,30vw,400px);height:clamp(200px,30vw,400px);top:15%;right:10%;animation:drift 11s ease-in-out infinite alternate"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">资质信誉</span>
+        <h2 class="reveal">真实可查的<em>企业底蕴</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <img class="pitch-slide-image reveal" src="/presentation-assets/license.png" alt="蒙通货运营业执照" style="margin-top: var(--pitch-content-gap);">
+        <p class="pitch-subtitle reveal" style="margin-top: var(--pitch-element-gap);">工商注册 · 道路运输许可 · 大件运输资质 — 一切可公开查验</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 13: 客户见证 -->
+    <section class="pitch-slide" id="slide-13">
+      <div class="blob blob-cyan" style="width:clamp(200px,35vw,450px);height:clamp(200px,35vw,450px);bottom:10%;left:10%;animation:drift 14s ease-in-out infinite alternate"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">客户信赖</span>
+        <h2 class="reveal">长期合作<em>口碑沉淀</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <div class="pitch-quote reveal" style="margin-top: var(--pitch-content-gap);">
+          二十年来，蒙通从未靠广告获客。<br>每一个客户，都是老客户介绍来的。
+        </div>
+        <div class="pitch-metrics reveal" style="margin-top: var(--pitch-content-gap);">
+          <div>
+            <div class="pitch-metric-val">85<span class="pitch-accent">%+</span></div>
+            <div class="pitch-metric-desc">客户续约率</div>
+          </div>
+          <div>
+            <div class="pitch-metric-val">0<span class="pitch-accent">元</span></div>
+            <div class="pitch-metric-desc">广告投放费用</div>
+          </div>
+          <div>
+            <div class="pitch-metric-val">20<span class="pitch-accent">年</span></div>
+            <div class="pitch-metric-desc">口碑积累</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 14: 合作邀请 -->
+    <section class="pitch-slide" id="slide-14">
+      <div class="blob blob-blue" style="width:clamp(300px,45vw,550px);height:clamp(300px,45vw,550px);top:25%;left:45%;animation:drift 16s ease-in-out infinite alternate"></div>
+      <div class="blob blob-indigo" style="width:clamp(150px,20vw,300px);height:clamp(150px,20vw,300px);bottom:15%;right:20%;animation:drift 11s ease-in-out infinite alternate-reverse"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <span class="pitch-badge reveal">合作邀请</span>
+        <h2 class="reveal">让我们<em>一起上路</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <p class="pitch-subtitle reveal" style="margin-top: var(--pitch-content-gap);">
+          无论您是需要可靠运力的货主，<br>
+          还是寻找稳定货源的车队与司机——<br>
+          蒙通期待与您建立长效、互信的合作关系。
+        </p>
+        <div class="pitch-highlight-box reveal" style="margin-top: var(--pitch-content-gap); max-width: 480px;">
+          <p>🤝 一次合作，长期伙伴。这是蒙通的承诺。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 15: 联系我们 -->
+    <section class="pitch-slide" id="slide-15">
+      <div class="blob blob-blue" style="width:clamp(250px,40vw,500px);height:clamp(250px,40vw,500px);top:10%;left:15%;animation:drift 14s ease-in-out infinite alternate"></div>
+      <div class="blob blob-cyan" style="width:clamp(200px,30vw,400px);height:clamp(200px,30vw,400px);bottom:10%;right:10%;animation:drift 12s ease-in-out infinite alternate-reverse"></div>
+      <div class="pitch-texture"></div>
+      <div class="pitch-slide-content">
+        <img class="pitch-slide-image pitch-logo reveal" src="/presentation-assets/logo_128.png" alt="蒙通货运">
+        <h2 class="reveal">联系<em>蒙通</em></h2>
+        <div class="pitch-divider reveal"></div>
+        <div class="pitch-contact-grid reveal" style="margin-top: var(--pitch-content-gap);">
+          <div class="pitch-contact-item">
+            <div class="pitch-contact-label">电话</div>
+            <div class="pitch-contact-value">139-1022-5509</div>
+          </div>
+          <div class="pitch-contact-item">
+            <div class="pitch-contact-label">电话</div>
+            <div class="pitch-contact-value">137-0128-2504</div>
+          </div>
+          <div class="pitch-contact-item">
+            <div class="pitch-contact-label">邮箱</div>
+            <div class="pitch-contact-value">mengtonghuoyun@163.com</div>
+          </div>
+        </div>
+        <img class="pitch-slide-image pitch-qr reveal" src="/presentation-assets/wechat.jpg" alt="微信二维码" style="margin-top: var(--pitch-content-gap);">
+        <p class="pitch-subtitle reveal" style="margin-top: var(--pitch-element-gap);">扫码添加微信，即刻咨询</p>
+      </div>
+    </section>
+
+  </div><!-- end .pitch-container -->
+
+  <!-- ===========================================
+       PITCH PAGE STYLES
+       All scoped with .pitch- prefix to avoid
+       conflicts with global Astro/Tailwind CSS
+       =========================================== -->
+  <style is:global>
+    /* Import pitch fonts */
+    @import url('https://api.fontshare.com/v2/css?f[]=zodiak@400;500;600&f[]=satoshi@400;500;700&display=swap');
+
+    /* ---- Override Layout/global body styles for pitch ---- */
+    body.fullscreen {
+      background: #0A0E1A !important;
+      color: #E8E4DF !important;
+      font-family: 'Satoshi', sans-serif !important;
+      overflow-x: hidden !important;
+      height: 100% !important;
+      overflow-y: auto !important;
+    }
+
+    /* ---- Pitch CSS Custom Properties ---- */
+    .pitch-container {
+      --pitch-bg-primary: #0A0E1A;
+      --pitch-bg-secondary: #0F1424;
+      --pitch-bg-card: rgba(15, 25, 50, 0.6);
+      --pitch-text-primary: #E8E4DF;
+      --pitch-text-secondary: rgba(232, 228, 223, 0.5);
+      --pitch-text-muted: rgba(232, 228, 223, 0.3);
+      --pitch-accent: #007AFF;
+      --pitch-accent-light: #5AC8FA;
+      --pitch-accent-glow: rgba(0, 122, 255, 0.3);
+      --pitch-accent-subtle: rgba(0, 122, 255, 0.08);
+      --pitch-gradient-accent: linear-gradient(135deg, #007AFF, #5AC8FA);
+      --pitch-border-subtle: rgba(0, 122, 255, 0.15);
+
+      --pitch-font-display: 'Zodiak', serif;
+      --pitch-font-body: 'Satoshi', sans-serif;
+      --pitch-title-size: clamp(2rem, 6.5vw, 4.5rem);
+      --pitch-h2-size: clamp(1.5rem, 4vw, 2.75rem);
+      --pitch-h3-size: clamp(1rem, 2.2vw, 1.5rem);
+      --pitch-body-size: clamp(0.75rem, 1.2vw, 1rem);
+      --pitch-small-size: clamp(0.6rem, 0.9vw, 0.8rem);
+      --pitch-overline-size: clamp(0.55rem, 0.8vw, 0.65rem);
+
+      --pitch-slide-padding: clamp(1.5rem, 5vw, 5rem);
+      --pitch-content-gap: clamp(0.75rem, 2vw, 2rem);
+      --pitch-element-gap: clamp(0.3rem, 1vw, 0.75rem);
+
+      --pitch-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --pitch-duration-normal: 0.7s;
+    }
+
+    /* ---- Container: scroll-snap ---- */
+    .pitch-container {
+      scroll-snap-type: y mandatory;
+      height: 100vh;
+      height: 100dvh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* ---- Slide base ---- */
+    .pitch-slide {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: var(--pitch-slide-padding);
+      text-align: center;
+    }
+
+    .pitch-slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      max-height: 100%;
+      max-width: min(90vw, 900px);
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ---- Background blobs ---- */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-blue { background: radial-gradient(ellipse, #007AFF 0%, transparent 70%); }
+    .blob-cyan { background: radial-gradient(ellipse, #5AC8FA 0%, transparent 70%); }
+    .blob-indigo { background: radial-gradient(ellipse, #3A3AFF 0%, transparent 70%); }
+
+    .pitch-texture {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ---- Typography ---- */
+    .pitch-slide h1 {
+      font-family: var(--pitch-font-display) !important;
+      font-size: var(--pitch-title-size) !important;
+      font-weight: 600 !important;
+      line-height: 1.1 !important;
+      letter-spacing: -0.02em !important;
+      color: var(--pitch-text-primary) !important;
+    }
+    .pitch-slide h1 em,
+    .pitch-slide h2 em {
+      font-style: italic;
+      background: var(--pitch-gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pitch-slide h2 {
+      font-family: var(--pitch-font-display) !important;
+      font-size: var(--pitch-h2-size) !important;
+      font-weight: 600 !important;
+      line-height: 1.15 !important;
+      letter-spacing: -0.02em !important;
+      color: var(--pitch-text-primary) !important;
+    }
+    .pitch-slide h3 {
+      font-family: var(--pitch-font-display) !important;
+      font-size: var(--pitch-h3-size) !important;
+      font-weight: 500 !important;
+      line-height: 1.3 !important;
+      color: var(--pitch-text-primary) !important;
+    }
+    .pitch-slide p,
+    .pitch-slide li {
+      font-size: var(--pitch-body-size);
+      line-height: 1.7;
+      color: var(--pitch-text-secondary);
+    }
+
+    /* ---- Badge ---- */
+    .pitch-badge {
+      display: inline-block;
+      font-family: var(--pitch-font-body);
+      font-size: var(--pitch-overline-size);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pitch-accent-light);
+      border: 1px solid var(--pitch-border-subtle);
+      padding: 0.35em 1.2em;
+      border-radius: 100px;
+      margin-bottom: var(--pitch-content-gap);
+    }
+
+    /* ---- Divider ---- */
+    .pitch-divider {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--pitch-accent), transparent);
+      margin: var(--pitch-element-gap) auto;
+    }
+
+    /* ---- Subtitle ---- */
+    .pitch-subtitle {
+      font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+      color: var(--pitch-text-secondary);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ---- Metrics ---- */
+    .pitch-metrics {
+      display: flex;
+      justify-content: center;
+      gap: clamp(2rem, 5vw, 4.5rem);
+      margin-top: var(--pitch-content-gap);
+    }
+    .pitch-metric-val {
+      font-family: var(--pitch-font-display);
+      font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      color: var(--pitch-text-primary);
+    }
+    .pitch-accent {
+      background: var(--pitch-gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pitch-metric-desc {
+      font-size: var(--pitch-small-size);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pitch-text-muted);
+      margin-top: 4px;
+    }
+
+    /* ---- Cards ---- */
+    .pitch-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: clamp(0.75rem, 1.5vw, 1.25rem);
+      width: 100%;
+      max-width: min(90vw, 900px);
+    }
+    .pitch-card {
+      background: var(--pitch-bg-card);
+      border: 1px solid var(--pitch-border-subtle);
+      border-radius: 16px;
+      padding: clamp(1rem, 2vw, 1.75rem);
+      text-align: left;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .pitch-card:hover {
+      border-color: rgba(0, 122, 255, 0.35);
+      transform: translateY(-2px);
+    }
+    .pitch-card-icon {
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      margin-bottom: var(--pitch-element-gap);
+    }
+    .pitch-card h3 { margin-bottom: clamp(0.25rem, 0.5vw, 0.5rem); }
+    .pitch-card p {
+      font-size: var(--pitch-small-size);
+      color: var(--pitch-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ---- Steps ---- */
+    .pitch-steps {
+      display: flex;
+      gap: clamp(1rem, 2vw, 2rem);
+      width: 100%;
+      max-width: min(90vw, 900px);
+    }
+    .pitch-step {
+      flex: 1;
+      text-align: left;
+      padding: clamp(0.75rem, 1.5vw, 1.25rem);
+      border-left: 2px solid var(--pitch-accent);
+      position: relative;
+    }
+    .pitch-step-num {
+      font-family: var(--pitch-font-display);
+      font-size: clamp(0.8rem, 1.2vw, 1rem);
+      font-weight: 600;
+      color: var(--pitch-accent-light);
+      margin-bottom: clamp(0.25rem, 0.5vw, 0.5rem);
+    }
+    .pitch-step h3 { font-size: clamp(0.85rem, 1.3vw, 1.1rem); margin-bottom: clamp(0.2rem, 0.4vw, 0.35rem); }
+    .pitch-step p { font-size: var(--pitch-small-size); }
+
+    /* ---- Images ---- */
+    .pitch-slide-image {
+      max-width: 100%;
+      max-height: min(45vh, 380px);
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid var(--pitch-border-subtle);
+      box-shadow: 0 8px 40px rgba(0, 122, 255, 0.08);
+    }
+    .pitch-slide-image.pitch-logo {
+      max-height: min(25vh, 160px);
+      border: none;
+      box-shadow: none;
+      border-radius: 50%;
+    }
+    .pitch-slide-image.pitch-qr {
+      max-height: min(30vh, 200px);
+      border-radius: 12px;
+    }
+
+    /* ---- Bullet list ---- */
+    .pitch-bullet-list {
+      list-style: none;
+      text-align: left;
+      max-width: 600px;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    .pitch-bullet-list li {
+      padding: clamp(0.3rem, 0.6vw, 0.5rem) 0;
+      padding-left: 1.5em;
+      position: relative;
+    }
+    .pitch-bullet-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--pitch-accent);
+    }
+
+    /* ---- Two column ---- */
+    .pitch-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1.5rem, 3vw, 3rem);
+      align-items: center;
+      width: 100%;
+      max-width: min(90vw, 900px);
+      text-align: left;
+    }
+
+    /* ---- Highlight box ---- */
+    .pitch-highlight-box {
+      background: var(--pitch-accent-subtle);
+      border: 1px solid var(--pitch-border-subtle);
+      border-radius: 12px;
+      padding: clamp(0.75rem, 1.5vw, 1.25rem) clamp(1rem, 2vw, 1.5rem);
+      margin-top: var(--pitch-element-gap);
+    }
+    .pitch-highlight-box p {
+      font-size: var(--pitch-small-size);
+      color: var(--pitch-accent-light) !important;
+    }
+
+    /* ---- Quote ---- */
+    .pitch-quote {
+      font-family: var(--pitch-font-display);
+      font-size: clamp(1.1rem, 2.5vw, 1.75rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--pitch-text-primary);
+      max-width: 650px;
+      position: relative;
+    }
+    .pitch-quote::before {
+      content: '\201C';
+      font-size: 3em;
+      position: absolute;
+      top: -0.3em;
+      left: -0.5em;
+      color: var(--pitch-accent);
+      opacity: 0.3;
+    }
+
+    /* ---- Contact grid ---- */
+    .pitch-contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+      gap: clamp(0.5rem, 1vw, 1rem);
+      width: 100%;
+      max-width: min(90vw, 700px);
+      text-align: center;
+    }
+    .pitch-contact-item { padding: clamp(0.5rem, 1vw, 0.75rem); }
+    .pitch-contact-label {
+      font-size: var(--pitch-overline-size);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--pitch-text-muted);
+      margin-bottom: 4px;
+    }
+    .pitch-contact-value {
+      font-size: var(--pitch-small-size);
+      color: var(--pitch-text-primary);
+    }
+
+    /* ---- Navigation dots ---- */
+    .pitch-nav-dots {
+      position: fixed;
+      right: clamp(0.75rem, 1.5vw, 1.5rem);
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 100;
+    }
+    .pitch-nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+    .pitch-nav-dot.active {
+      background: var(--pitch-accent, #007AFF);
+      box-shadow: 0 0 8px rgba(0, 122, 255, 0.3);
+      transform: scale(1.3);
+    }
+
+    /* ---- Progress bar ---- */
+    .pitch-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(135deg, #007AFF, #5AC8FA);
+      z-index: 100;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* ---- Keyboard hint ---- */
+    .pitch-keyboard-hint {
+      position: fixed;
+      bottom: clamp(1rem, 2vw, 2rem);
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: var(--pitch-overline-size, 0.65rem);
+      letter-spacing: 0.15em;
+      color: rgba(232, 228, 223, 0.3);
+      z-index: 100;
+      transition: opacity 1.5s ease;
+    }
+
+    /* ---- Reveal animations ---- */
+    .pitch-slide .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .pitch-slide.visible .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pitch-slide .reveal:nth-child(1) { transition-delay: 0.05s; }
+    .pitch-slide .reveal:nth-child(2) { transition-delay: 0.15s; }
+    .pitch-slide .reveal:nth-child(3) { transition-delay: 0.25s; }
+    .pitch-slide .reveal:nth-child(4) { transition-delay: 0.35s; }
+    .pitch-slide .reveal:nth-child(5) { transition-delay: 0.45s; }
+    .pitch-slide .reveal:nth-child(6) { transition-delay: 0.55s; }
+
+    .counter { display: inline-block; }
+
+    /* ---- Drift animation ---- */
+    @keyframes drift {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(20px, -15px) scale(1.06); }
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-height: 700px) {
+      .pitch-container {
+        --pitch-slide-padding: clamp(1rem, 3vw, 2.5rem);
+        --pitch-content-gap: clamp(0.5rem, 1.5vw, 1rem);
+        --pitch-title-size: clamp(1.5rem, 5.5vw, 3rem);
+        --pitch-h2-size: clamp(1.25rem, 3.5vw, 2rem);
+      }
+    }
+    @media (max-height: 600px) {
+      .pitch-container {
+        --pitch-slide-padding: clamp(0.75rem, 2.5vw, 1.5rem);
+        --pitch-content-gap: clamp(0.4rem, 1vw, 0.75rem);
+        --pitch-title-size: clamp(1.25rem, 5vw, 2.5rem);
+        --pitch-body-size: clamp(0.7rem, 1.1vw, 0.9rem);
+      }
+      .pitch-nav-dots, .pitch-keyboard-hint { display: none; }
+    }
+    @media (max-height: 500px) {
+      .pitch-container {
+        --pitch-slide-padding: clamp(0.5rem, 2vw, 1rem);
+        --pitch-title-size: clamp(1rem, 4vw, 1.75rem);
+        --pitch-h2-size: clamp(0.9rem, 3vw, 1.5rem);
+        --pitch-body-size: clamp(0.65rem, 1vw, 0.8rem);
+      }
+    }
+    @media (max-width: 768px) {
+      .pitch-two-col { grid-template-columns: 1fr; }
+      .pitch-steps { flex-direction: column; }
+      .pitch-container { --pitch-title-size: clamp(1.5rem, 8vw, 3rem); }
+    }
+    @media (max-width: 600px) {
+      .pitch-cards { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pitch-slide .reveal {
+        transition-duration: 0.2s !important;
+      }
+    }
+  </style>
+
+  <!-- ===========================================
+       PITCH JS: Navigation, animations, counters
+       =========================================== -->
+  <script is:inline>
+    (function() {
+      const container = document.getElementById('pitchContainer');
+      if (!container) return;
+
+      const slides = container.querySelectorAll('.pitch-slide');
+      const totalSlides = slides.length;
+      let currentSlide = 0;
+      let isAnimating = false;
+
+      const progressBar = document.getElementById('progressBar');
+      const navDotsContainer = document.getElementById('navDots');
+      const keyHint = document.getElementById('keyHint');
+
+      // --- Create nav dots ---
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'pitch-nav-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+        dot.addEventListener('click', function() { goToSlide(i); });
+        navDotsContainer.appendChild(dot);
+      }
+
+      // --- Intersection Observer ---
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            const idx = Array.from(slides).indexOf(entry.target);
+            currentSlide = idx;
+            updateNavDots(idx);
+            updateProgress();
+            if (idx === 4) animateCounters(entry.target);
+          }
+        });
+      }, { threshold: 0.5, root: container });
+
+      slides.forEach(function(slide) { observer.observe(slide); });
+
+      // --- Keyboard navigation ---
+      document.addEventListener('keydown', function(e) {
+        if (isAnimating) return;
+        switch (e.key) {
+          case 'ArrowDown': case 'ArrowRight': case ' ': case 'PageDown':
+            e.preventDefault(); nextSlide(); break;
+          case 'ArrowUp': case 'ArrowLeft': case 'PageUp':
+            e.preventDefault(); prevSlide(); break;
+          case 'Home': e.preventDefault(); goToSlide(0); break;
+          case 'End': e.preventDefault(); goToSlide(totalSlides - 1); break;
+        }
+      });
+
+      // --- Touch navigation ---
+      var touchStartY = 0;
+      container.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+      container.addEventListener('touchend', function(e) {
+        var diff = touchStartY - e.changedTouches[0].clientY;
+        if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); }
+      }, { passive: true });
+
+      function nextSlide() {
+        if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
+      }
+      function prevSlide() {
+        if (currentSlide > 0) goToSlide(currentSlide - 1);
+      }
+      function goToSlide(index) {
+        if (index < 0 || index >= totalSlides || isAnimating) return;
+        isAnimating = true;
+        slides[index].scrollIntoView({ behavior: 'smooth' });
+        currentSlide = index;
+        updateNavDots(index);
+        updateProgress();
+        setTimeout(function() { isAnimating = false; }, 800);
+      }
+
+      function updateNavDots(idx) {
+        var dots = navDotsContainer.querySelectorAll('.pitch-nav-dot');
+        dots.forEach(function(dot, i) { dot.classList.toggle('active', i === idx); });
+      }
+
+      function updateProgress() {
+        var pct = ((currentSlide + 1) / totalSlides) * 100;
+        progressBar.style.width = pct + '%';
+      }
+
+      function animateCounters(slide) {
+        var counters = slide.querySelectorAll('.counter');
+        counters.forEach(function(counter) {
+          if (counter.dataset.animated) return;
+          counter.dataset.animated = 'true';
+          var target = parseInt(counter.dataset.target);
+          var duration = 2000;
+          var start = performance.now();
+          var format = function(n) { return n >= 10000 ? n.toLocaleString('en-US') : n.toString(); };
+          var tick = function(now) {
+            var elapsed = now - start;
+            var progress = Math.min(elapsed / duration, 1);
+            var ease = 1 - Math.pow(1 - progress, 3);
+            counter.textContent = format(Math.round(ease * target));
+            if (progress < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        });
+      }
+
+      // Hide hint after 4s
+      setTimeout(function() { if (keyHint) keyHint.style.opacity = '0'; }, 4000);
+    })();
+  </script>
+</Layout>
