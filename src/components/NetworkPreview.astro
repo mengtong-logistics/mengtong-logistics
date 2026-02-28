@@ -18,17 +18,17 @@
         <p class="text-gray-400 text-lg leading-relaxed mb-8 max-w-lg">
           覆盖北京至内蒙古全域22个核心节点城市，构建高效的京蒙物流走廊。从呼和浩特到满洲里，从北京到呼伦贝尔，蒙通运力无处不达。
         </p>
-        <div class="flex flex-wrap gap-6 mb-10 justify-center lg:justify-start">
+        <div class="flex flex-wrap gap-6 mb-10 justify-center lg:justify-start" id="networkStats">
           <div class="text-center">
-            <div class="text-3xl font-black text-white">58,600<span class="text-cyan-400 text-lg">+</span></div>
+            <div class="text-3xl font-black text-white"><span class="network-counter" data-target="58600" data-format="comma">0</span><span class="text-cyan-400 text-lg">+</span></div>
             <div class="text-xs text-gray-500 mt-1">累计发运单量</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-white">356,000<span class="text-cyan-400 text-lg">吨</span></div>
+            <div class="text-3xl font-black text-white"><span class="network-counter" data-target="356000" data-format="comma">0</span><span class="text-cyan-400 text-lg">吨</span></div>
             <div class="text-xs text-gray-500 mt-1">累计承运货量</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-white">22<span class="text-cyan-400 text-lg">+</span></div>
+            <div class="text-3xl font-black text-white"><span class="network-counter" data-target="22" data-format="plain">0</span><span class="text-cyan-400 text-lg">+</span></div>
             <div class="text-xs text-gray-500 mt-1">覆盖核心节点</div>
           </div>
         </div>
@@ -67,3 +67,40 @@
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    function animateCounters(section: Element) {
+      const counters = section.querySelectorAll<HTMLElement>('.network-counter');
+      counters.forEach(function (counter) {
+        if (counter.dataset.animated) return;
+        counter.dataset.animated = 'true';
+        const target = parseInt(counter.dataset.target ?? '0');
+        const useComma = counter.dataset.format === 'comma';
+        const duration = 3800;
+        const start = performance.now();
+        const fmt = (n: number) => useComma ? n.toLocaleString('en-US') : String(n);
+        const tick = (now: number) => {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 5);
+          counter.textContent = fmt(Math.round(ease * target));
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }
+
+    const section = document.getElementById('networkStats');
+    if (!section) return;
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCounters(entry.target);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(section);
+  })();
+</script>
